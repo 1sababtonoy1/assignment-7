@@ -1,56 +1,47 @@
-import CategoryProductList from "@/components/CategoryProductList";
-import { toBn, type Product } from "@/components/PriceCard";
-import { notFound } from "next/navigation";
+import Link from "next/link";
 
-type CategoryProduct = Product & {
-    categoryNameBn: string;
-    categoryIcon: string;
-};
-
-const CategoryProducts = async ({
-    params,
-}: {
-    params: Promise<{ categoryId: string }>;
-}) => {
-    const { categoryId } = await params;
-
-    const res = await fetch(
-        `https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`
-    );
-
-    // API ব্যর্থ হলে not-found পেজ দেখাবে
-    if (!res.ok) notFound();
-
-    const data = await res.json();
-
-    // API সরাসরি অ্যারে দিলেও, বা { products: [...] } দিলেও কাজ করবে
-    const products: CategoryProduct[] = Array.isArray(data)
-        ? data
-        : data?.products ?? [];
-
-    // কোনো ডেটা না থাকলে not-found পেজ দেখাবে
-    if (products.length === 0) notFound();
-
-    // ক্যাটাগরির নাম ও আইকন: প্রথম পণ্য থেকে (না থাকলে data থেকে)
-    const categoryNameBn = products[0]?.categoryNameBn ?? data?.categoryNameBn ?? "";
-    const categoryIcon = products[0]?.categoryIcon ?? data?.categoryIcon ?? "";
-
+const NotFound = () => {
     return (
-        <div className="max-w-6xl mx-auto px-4 py-10 space-y-8">
-            {/* ক্যাটাগরি হেডার কার্ড */}
-            <div className="bg-base-100 border border-base-200 rounded-3xl p-6 md:p-8 flex items-center gap-5">
-                <span className="text-5xl md:text-6xl">{categoryIcon}</span>
-                <div>
-                    <h1 className="text-3xl md:text-4xl font-bold">{categoryNameBn}</h1>
-                    <p className="text-base-content/60 mt-1">
-                        {toBn(products.length)}টি পণ্যের আজকের দাম ও পরিবর্তন
-                    </p>
-                </div>
-            </div>
+        <div className="min-h-[75vh] flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 px-4 py-12">
+            <div className="text-center max-w-lg">
+                {/* বড় ৪০৪ লেখা, গ্লো ইফেক্টসহ */}
+                <h1 className="text-[8rem] sm:text-[12rem] font-black leading-none bg-gradient-to-b from-green-500 to-green-800 bg-clip-text text-transparent drop-shadow-[0_5px_15px_rgba(22,163,74,0.4)] select-none">
+                    404
+                </h1>
 
-            <CategoryProductList products={products} />
+                {/* মাঝের ডিভাইডার */}
+                <div className="flex items-center justify-center gap-3 my-4">
+                    <span className="h-px w-16 bg-green-400"></span>
+                    <span className="text-xl">🛒</span>
+                    <span className="h-px w-16 bg-green-400"></span>
+                </div>
+
+                {/* বার্তা */}
+                <h2 className="text-2xl sm:text-3xl font-bold text-green-900 mb-3">
+                    পেজটি খুঁজে পাওয়া যায়নি
+                </h2>
+                <p className="text-green-800/80 mb-8 leading-relaxed">
+                    দুঃখিত! আপনি যে পেজ বা পণ্যটি খুঁজছেন সেটি হয়তো সরানো হয়েছে,
+                    অথবা লিংকটি ভুল। চলুন, আজকের বাজারদরে ফিরে যাই।
+                </p>
+
+                {/* বাটন */}
+                <Link
+                    href="/"
+                    className="inline-block px-8 py-3 rounded-full font-semibold text-white
+                               bg-gradient-to-r from-green-600 to-emerald-700
+                               shadow-lg shadow-green-600/40
+                               hover:from-green-700 hover:to-emerald-800
+                               hover:shadow-xl hover:shadow-green-700/50
+                               hover:-translate-y-0.5
+                               active:translate-y-0
+                               transition-all duration-300 ease-out"
+                >
+                    ← হোম পেজে ফিরে যান
+                </Link>
+            </div>
         </div>
     );
 };
 
-export default CategoryProducts;
+export default NotFound;

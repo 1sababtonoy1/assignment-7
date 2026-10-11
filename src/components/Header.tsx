@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import NavLinks from "./NavLinks";
 import UserInfo from "./UserInfo";
 import CurrentDate from "./CurrentDate";
@@ -9,8 +10,12 @@ const Header = () => {
     <header className="w-full border-x border-b border-gray-200 bg-[#f9fbf9]">
       {/* Top Section */}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-        {/* Logo and Website Name */}
-        <div className="flex items-center gap-3">
+        {/* Logo and Website Name: ক্লিক করলে হোম পেজে যায় */}
+        <Link
+          href="/"
+          aria-label="হোম পেজে যান"
+          className="flex items-center gap-3"
+        >
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-600">
             <Image
               src="/Stack.png"
@@ -33,7 +38,7 @@ const Header = () => {
               </Suspense>
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* Authentication Buttons */}
         <UserInfo />

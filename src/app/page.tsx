@@ -24,7 +24,7 @@ const ProductSections = async () => {
 export default function Home() {
   return (
     <div>
-      <Marquee />
+  
       <Banner />
       <Suspense fallback={<div className="min-h-screen" />}>
         <ProductSections />
