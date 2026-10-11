@@ -1,20 +1,23 @@
-"use client"
+import { Suspense } from "react";
 import Image from "next/image";
+import CurrentDate from "./CurrentDate";
 
 const Banner = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
-
   return (
     <section className="container mx-auto px-4 py-5 md:px-6">
       <div className="flex min-h-[400px] flex-col items-center justify-between gap-8 rounded-[32px] border border-[#DFE7E0] bg-[#FCFDFC] px-6 py-10 md:min-h-[540px] md:flex-row md:px-12 lg:px-16">
         {/* Left Content */}
         <div className="flex-1">
           {/* Date */}
-          <span className="inline-block rounded-full bg-[#E5F1E7] px-4 py-2 text-base font-medium text-[#07813B] md:text-xl">
-            {date}
-          </span>
+          <Suspense
+            fallback={
+              <span className="inline-block h-10 w-64 animate-pulse rounded-full bg-[#E5F1E7] md:h-12" />
+            }
+          >
+            <span className="inline-block rounded-full bg-[#E5F1E7] px-4 py-2 text-base font-medium text-[#07813B] md:text-xl">
+              <CurrentDate />
+            </span>
+          </Suspense>
 
           {/* Heading */}
           <h1 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-[#1F2922] md:text-4xl lg:text-5xl">
@@ -28,17 +31,13 @@ const Banner = () => {
             দামের পরিবর্তন এক জায়গায়।
           </p>
 
-          {/* Button */}
-          <button
-            onClick={() =>
-              document
-                .getElementById("products")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="mt-7 rounded-xl bg-[#07813B] px-6 py-4 text-lg font-bold text-white shadow-md transition-all duration-200 hover:bg-[#066B32] hover:shadow-lg"
+          {/* Button: নিচের সব পণ্য সেকশনে (id="সব-পণ্য") নিয়ে যায় */}
+          <a
+            href="#সব-পণ্য"
+            className="mt-7 inline-block rounded-xl bg-[#07813B] px-6 py-4 text-lg font-bold text-white shadow-md transition-all duration-200 hover:bg-[#066B32] hover:shadow-lg"
           >
             সব পণ্য দেখুন
-          </button>
+          </a>
         </div>
 
         {/* Right Illustration */}
