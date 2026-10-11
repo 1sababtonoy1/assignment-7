@@ -1,4 +1,4 @@
-import Link from "next/link";
+import NavItem from "./NavItem";
 
 interface Navs {
   id: string;
@@ -20,16 +20,9 @@ const NavLinks = async () => {
 
   return (
     <nav className="mx-auto max-w-7xl px-4 md:px-6">
-      <div className="flex items-center gap-6 overflow-x-auto py-4 md:gap-8">
+      <div className="flex items-center gap-2 overflow-x-auto py-3 md:gap-3">
         {data.map((n) => (
-          <Link
-            key={n.id}
-            href={`/category/${n.slug}`}
-            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-gray-800 transition hover:text-green-600 md:text-base"
-          >
-            <span>{n.icon}</span>
-            <span>{n.nameBn}</span>
-          </Link>
+          <NavItem key={n.id} slug={n.slug} nameBn={n.nameBn} icon={n.icon} />
         ))}
       </div>
     </nav>
