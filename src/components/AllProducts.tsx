@@ -13,7 +13,8 @@ const AllProducts = ({ products = [] }: { products: Product[] }) => {
     if (sortBy === "high-low") sortedProducts.sort((a, b) => b.today - a.today);
 
     return (
-        <div className="max-w-6xl mx-auto px-4 py-10">
+        // id: ব্যানারের বাটন এই সেকশনে স্ক্রল করে আসে
+        <div id="সব-পণ্য" className="max-w-6xl mx-auto px-4 py-10 scroll-mt-6">
             <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
                     <h2 className="text-2xl md:text-3xl font-bold">সব পণ্য</h2>
