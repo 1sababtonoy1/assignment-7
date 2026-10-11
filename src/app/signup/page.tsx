@@ -8,13 +8,11 @@ import { authClient } from "@/lib/auth-client";
 
 const SignUpPage = () => {
     const router = useRouter();
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [socialLoading, setSocialLoading] = useState<"google" | "github" | null>(null);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError("");
 
         const formData = new FormData(e.currentTarget);
         const { name, email, password, confirmPassword } = Object.fromEntries(
@@ -27,7 +25,7 @@ const SignUpPage = () => {
         };
 
         if (password !== confirmPassword) {
-            setError("পাসওয়ার্ড দুটি মিলছে না");
+            toast.error("পাসওয়ার্ড দুটি মিলছে না");
             return;
         }
 
@@ -42,22 +40,22 @@ const SignUpPage = () => {
 
         setLoading(false);
 
-        if (error) {
-            console.log(error);
-            setError(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি, আবার চেষ্টা করুন");
-            return;
-        }
-
         if (data) {
+            toast.success("অ্যাকাউন্ট তৈরি হয়েছে!");
+            console.log(data);
             router.push("/");
             router.refresh();
+        }
+
+        if (error) {
+            toast.error(error.message || "কিছু ভুল হয়েছে, আবার চেষ্টা করুন");
+            console.log(error);
         }
     };
 
     // Google / GitHub দিয়ে সাইন আপ (নতুন ইউজার হলে অ্যাকাউন্ট নিজে থেকেই তৈরি হয়)
     // সফল হলে ব্রাউজার প্রোভাইডারের পেজে চলে যায়, তারপর callbackURL ("/")-এ ফিরে আসে
     const handleSocial = async (provider: "google" | "github") => {
-        setError("");
         setSocialLoading(provider);
 
         const { error } = await authClient.signIn.social({
@@ -67,8 +65,8 @@ const SignUpPage = () => {
 
         // এরর না হলে পেজ রিডাইরেক্ট হয়ে যায়, তাই লোডিং শুধু এররের ক্ষেত্রে বন্ধ করছি
         if (error) {
+            toast.error(error.message || "কিছু ভুল হয়েছে, আবার চেষ্টা করুন");
             console.log(error);
-            toast.error(error.message || "সাইন আপ করা যায়নি, আবার চেষ্টা করুন");
             setSocialLoading(null);
         }
     };
@@ -143,8 +141,6 @@ const SignUpPage = () => {
                             className="input w-full rounded-xl bg-base-100 border-base-300"
                         />
                     </div>
-
-                    {error && <p className="text-sm text-error">{error}</p>}
 
                     <button
                         type="submit"
