@@ -27,11 +27,11 @@ const SignInPage = () => {
 
         setLoading(true);
 
+        // callbackURL ইচ্ছা করে দেওয়া হয়নি: দিলে পেজ রিলোড হয়ে টোস্ট মুছে যায়
         const { data, error } = await authClient.signIn.email({
             email,
             password,
             rememberMe: true,
-            callbackURL: "/",
         });
 
         setLoading(false);

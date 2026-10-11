@@ -31,11 +31,11 @@ const SignUpPage = () => {
 
         setLoading(true);
 
+        // callbackURL ইচ্ছা করে দেওয়া হয়নি: দিলে পেজ রিলোড হয়ে টোস্ট মুছে যায়
         const { data, error } = await authClient.signUp.email({
             name,
             email,
             password,
-            callbackURL: "/",
         });
 
         setLoading(false);
