@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🛒 বাজার দর | BazarDor
 
-First, run the development server:
+**আজকের বাজারের দাম, এক নজরে।**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম-দুধ ও মসলার দৈনিক দাম, বাজারভিত্তিক তুলনা এবং দামের পরিবর্তন, সবকিছু বাংলায় এক জায়গায়।
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📖 প্রজেক্ট সম্পর্কে
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**বাজার দর (BazarDor)** একটি বাংলা ভাষার ওয়েব অ্যাপ্লিকেশন, যেখানে নিত্যপ্রয়োজনীয় পণ্যের আজকের দাম দেখা যায়। প্রতিটি পণ্যের জন্য আছে গতকালের তুলনায় দাম বাড়া বা কমার হিসাব, এবং বিভাগ ও বাজার অনুযায়ী সর্বনিম্ন, সর্বোচ্চ ও গড় দামের বিস্তারিত তালিকা।
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ক্রেতারা বাজারে যাওয়ার আগেই জেনে নিতে পারেন কোন পণ্যের দাম বেড়েছে, কোনটির কমেছে, আর কোন বাজারে কত দাম চলছে।
 
-## Learn More
+## 🛠️ ব্যবহৃত প্রযুক্তি
 
-To learn more about Next.js, take a look at the following resources:
+| ক্ষেত্র | প্রযুক্তি |
+|---|---|
+| ফ্রেমওয়ার্ক | [Next.js 16](https://nextjs.org/) (App Router, Server Components) |
+| ভাষা | TypeScript, React |
+| স্টাইলিং | [Tailwind CSS](https://tailwindcss.com/), [daisyUI](https://daisyui.com/) |
+| অথেনটিকেশন | [Better Auth](https://www.better-auth.com/) (ইমেইল, Google, GitHub) |
+| ডেটাবেজ | MongoDB (Better Auth-এর MongoDB অ্যাডাপ্টার) |
+| নোটিফিকেশন | [react-hot-toast](https://react-hot-toast.com/) |
+| পণ্যের ডেটা | BazarDor REST API |
+| ডিপ্লয়মেন্ট | [Vercel](https://vercel.com/) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ প্রধান ৫টি ফিচার
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. 📂 ক্যাটাগরি অনুযায়ী পণ্য দেখা
+চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম-দুধ ও মসলা, প্রতিটি ক্যাটাগরির আলাদা পেজ। নেভিগেশন বার থেকে এক ক্লিকে যেকোনো ক্যাটাগরিতে যাওয়া যায়। ভুল বা ফাঁকা ক্যাটাগরিতে গেলে সুন্দর একটি ৪০৪ পেজ দেখায়।
 
-## Deploy on Vercel
+### 2. 📈 দাম বাড়া ও কমার হাইলাইট
+হোম পেজে **"আজ দাম বেড়েছে"** ও **"আজ দাম কমেছে"** সেকশনে সবচেয়ে বেশি বদলানো ৬টি করে পণ্য শতাংশসহ দেখানো হয়। এছাড়া ওপরে একটি চলমান টিকার (marquee) আছে, যেখানে সব পণ্যের দাম ও পরিবর্তন ঘুরতে থাকে।
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. 🔃 সব পণ্য ও দাম অনুযায়ী সাজানো
+"সব পণ্য" সেকশনে সব পণ্যের কার্ড একসাথে পাওয়া যায়। **ডিফল্ট**, **দাম: কম থেকে বেশি** ও **দাম: বেশি থেকে কম** ক্রমে সাজানোর ড্রপডাউন আছে। ব্যানারের "সব পণ্য দেখুন" বাটন চাপলে পেজ সরাসরি এই সেকশনে নেমে আসে।
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. 🏪 বাজারভিত্তিক বিস্তারিত দাম
+প্রতিটি পণ্যের বিস্তারিত পেজে আছে:
+- আজকের দাম এবং গতকালের তুলনায় পরিবর্তন
+- সর্বনিম্ন, সর্বাধিক ও গড় দামের সারসংক্ষেপ
+- ঢাকা, চট্টগ্রাম, রাজশাহী, ময়মনসিংহ, খুলনা ও সিলেট বিভাগের বাজারভিত্তিক দামের টেবিল
+
+### 5. 🔐 নিরাপদ অ্যাকাউন্ট ও প্রোফাইল
+ইমেইল-পাসওয়ার্ড, **Google** বা **GitHub** দিয়ে সাইন আপ ও সাইন ইন করা যায়। সফল বা ব্যর্থ হলে টোস্ট বার্তা দেখায়। সাইন ইন করা ইউজার নিজের প্রোফাইল দেখতে, নাম আপডেট করতে ও সাইন আউট করতে পারেন।
+
+> 📱 পুরো সাইটটি মোবাইল, ট্যাবলেট ও ডেস্কটপ, সব স্ক্রিনের জন্য রেসপন্সিভ।
+
+
+
+## 🌐 লাইভ লিংক
+
+👉 **[assignment-7-sage-one.vercel.app](https://assignment-7-sage-one.vercel.app)**
+
+---
+
+<div align="center">
+
+বাংলাদেশের বাজারের জন্য ❤️ দিয়ে তৈরি
+
+</div>
